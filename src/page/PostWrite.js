@@ -63,22 +63,22 @@ const Content = styled.textarea`
     border: 2px solid rgb(50, 84, 137, 0.1);
 `
 const Btn = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  border-radius: 1.2rem;
-  border: 1px solid #34558b;
-  color: #34558b;
-  font-size: 1.2rem;
-  width: 20%;
-  height: 80%;
-  font-weight: bold;
-  margin: 0;
-  &:hover{
-    background-color: #34558b;
-    color: white;
-    opacity: 0.9;
-  }
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 1.2rem;
+    border: 1px solid #34558b;
+    color: #34558b;
+    font-size: 1.2rem;
+    width: 20%;
+    height: 80%;
+    font-weight: bold;
+    margin: 0;
+    &:hover{
+        background-color: #34558b;
+        color: white;
+        opacity: 0.9;
+    }
 `
 
 
@@ -120,7 +120,8 @@ function PostWrite() {
     }
 
     const contentHandler = (e) => {
-        setContent(e.currentTarget.value)
+        setContent(e.currentTarget.value.replace(/(?:\r\n|\r|\n)/g,'<br/>'))
+
     }
     
     return (
@@ -132,7 +133,7 @@ function PostWrite() {
                 <Title >
                     <Input fluid placeholder="제목" onChange={titleHandler}/>
                 </Title>
-                <Content type="text" onChange={contentHandler}>
+                <Content type="text" wrap="hard" onChange={contentHandler}>
                 </Content>
                 <Top>
                     <button type="submit">저장하기</button>

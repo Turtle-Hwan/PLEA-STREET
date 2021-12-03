@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 const Content = styled.div`
   padding: 1rem;
   margin: 1rem;
-  height: 180px;
+  height: 200px;
   width : 94%;
   border-bottom: 4px solid rgb(50, 84, 137, 0.1);
   background-color: white;
@@ -30,11 +30,12 @@ const Loading = styled.div`
 `;
 
 const ListTitle = styled.span`
-    font-size : 1.6rem;
+    font-size : 2.0rem;
     padding-top: 1rem;
     font-weight: bold;
     overflow: hidden;
     cursor: pointer;
+    padding-bottom:1em;
 `
 
 const ListContent = styled.div`
@@ -63,7 +64,7 @@ function PostListComponent() {
   const options = {
       root: null,
       rootMargin:"10px",
-      threshold: 1
+      threshold: 0
   }
   console.log("boardIdcompoennt ", boardId1)
   
@@ -100,14 +101,10 @@ function PostListComponent() {
                 key={idx} 
                 onClick={() => {
                             pageHandler(post.boardId);
-                }}>
-                    <ListNum>no.{idx+1}</ListNum>
+                }}>        
                     <ListTitle>{post.boardTitle}</ListTitle>
-                    <ListContent>{post.boardContent}</ListContent>
-                    <ListWrite>
-                      <div>작성자</div>
-                      <div>작성시간</div>
-                    </ListWrite>
+                    <ListNum>{String(new Date().toLocaleDateString())}</ListNum>
+                    <ListContent>{post.boardContent.replaceAll('<br/>','\r\n')}</ListContent>
                 </Content>
             ))}
             <div ref ={observer}/>
@@ -117,3 +114,4 @@ function PostListComponent() {
 }
 
 export default PostListComponent
+

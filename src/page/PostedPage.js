@@ -27,13 +27,15 @@ const Top = styled.div`
     padding-top : 0.6em;
 `
 
-const Body = styled.div`
+const Body = styled.pre`
     width: 100%;
     height: 500px;
     padding: 1em;
     border: 2px solid rgb(50, 84, 137, 0.1);
     overflow-x: hidden;
     display: inline-block;
+    overflow: auto;
+    white-space: pre-wrap;
 `
 const Bottom = styled.div`
     width: 100%;
@@ -185,12 +187,11 @@ function PostedPage() {
             )
     }
 
-
     
     //갖고온 데이터를 세팅(포스트)
     const settingBoard= (res) => {
-        setTitle(res.data.title)
-        setContent(res.data.content)
+        setTitle(res.data.title.replaceAll('<br/>','\r\n'))
+        setContent(res.data.content.replaceAll('<br/>','\r\n'))
     }
 
     //댓글 등록
@@ -213,9 +214,11 @@ function PostedPage() {
             <Top>
                 {title}
             </Top>
+        
             <Body>
                 {content}
             </Body>
+    
             <Bottom>
                 <BottomDisplay>
                 {arr.map(({username,content},idx)=> 
